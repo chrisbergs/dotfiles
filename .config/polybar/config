@@ -4,7 +4,7 @@ include-file = ~/.config/polybar/config.focus
 monitor = ${env:MONITOR}
 width = 100%
 height = 37
-
+bottom = true
 # Don't forget to change this (used in tray)
 background_color = #313842
 background = #99313842
