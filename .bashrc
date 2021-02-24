@@ -3,7 +3,7 @@
 #
 
 # Enable vi mode
-set -o vi
+# set -o vi
 
 # Script vars
 #export MONITOR1='DP-4'
