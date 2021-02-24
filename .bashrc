@@ -6,9 +6,10 @@
 # set -o vi
 
 # Script vars
-#export MONITOR1='DP-4'
-export SCREEN_X=2560
-export SCREEN_Y=1440
+export MONITOR1='HDMI-0'
+export MONITOR2='DP-0'
+export SCREEN_X=1920
+export SCREEN_Y=1080
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
