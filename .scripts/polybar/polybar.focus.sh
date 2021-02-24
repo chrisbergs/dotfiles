@@ -8,4 +8,4 @@ sleep 0.2
 
 # Launch polybar
 MONITOR=$MONITOR1 polybar barfocus &
-#MONITOR=$MONITOR2 polybar barfocus2 &
+MONITOR=$MONITOR2 polybar barfocus2 &
