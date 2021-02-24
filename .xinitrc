@@ -63,7 +63,7 @@ wal -R
 setxkbmap -layout se
 setxkbmap -option ctrl:nocaps
 xcape -e 'Control_L=Escape'
-xmodmap ~/.Xmodmap
+# xmodmap ~/.Xmodmap
 xset r rate 200 35
 
 # Load nvidia-settings
