@@ -113,7 +113,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-msg exit"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -158,36 +158,36 @@ set $ws_game "6:game"
 set $ws_music "7:music"
 set $ws_mail "8:mail"
 
-workspace $ws_term output $mon_one
+workspace $ws_term output $mon_two
 workspace $ws_code output $mon_one
 workspace $ws_web output $mon_two
 workspace $ws_search output $mon_two
-workspace $ws_chat output $mon_one
+workspace $ws_chat output $mon_two
 workspace $ws_game output $mon_two
-workspace $ws_music output $mon_one
-workspace $ws_mail output $mon_one
+workspace $ws_music output $mon_two
+workspace $ws_mail output $mon_two
 
 # Assignments
 #assign [class="Sublime_text"] $ws_code
-#assign [class="Firefox"] $ws_web
 assign [class="discord"] $ws_chat
-assign [class="Steam"] $ws_chat
-assign [class="Wine" instance="league of legends.exe"] $ws_game
-assign [class="Wine" instance="leagueclientux.exe"] $ws_game
-assign [class="Wine"] $ws_game
+# assign [class="Steam"] $ws_chat
+# assign [class="Wine" instance="league of legends.exe"] $ws_game
+# assign [class="Wine" instance="leagueclientux.exe"] $ws_game
+# assign [class="Wine"] $ws_game
 
 # Runtime assignments
 #for_window [title="Minecraft Launcher"] move to workspace $ws_game
 
 # Autostart programs
 exec --no-startup-id i3-msg 'workspace 1:term; exec /usr/bin/urxvt'
-exec --no-startup-id i3-msg 'workspace 2:code; exec ~/.scripts/urxvt/exec code'
-exec --no-startup-id i3-msg 'workspace 3:web; exec /usr/bin/firefox'
+# exec --no-startup-id i3-msg 'workspace 2:code; exec ~/.scripts/urxvt/exec code'
+exec i3-msg workspace $ws_web
+exec --no-startup-id i3-msg 'workspace 3:web; exec /usr/bin/chromium'
 exec --no-startup-id i3-msg 'workspace 5:chat; exec /usr/bin/discord'
-exec --no-startup-id i3-msg 'workspace 4:chat; exec ~/.scripts/steam/steam.sh'
-exec --no-startup-id i3-msg 'workspace 7:music; exec ~/.scripts/urxvt/exec ncmpcpp'
-exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/leaty'
-exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/vizzit'
+
+# Autostart Email
+exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/christofferbergstrom93'
+# exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/vizzit'
 
 # Glitter and diamonds
 exec_always --no-startup-id bash -l ~/.scripts/background/vidbg.sh
@@ -200,16 +200,17 @@ exec_always --no-startup-id xset r rate 200 35
 bindsym $mod+Shift+u exec ~/.scripts/colors/colors.sh
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
 bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
-bindsym Mod1+Return exec firefox
-bindsym $mod+p exec rkeep-client -s keys
-bindsym $mod+o exec rkeep-client -s vizzit
+bindsym Mod1+Return exec chromium
+bindsym Mod1+$mod+Return exec firefox
+# bindsym $mod+p exec rkeep-client -s keys
+# bindsym $mod+o exec rkeep-client -s vizzit
 
 # Move floating
 bindsym $mod+m mode "move" focus floating
 mode "move" {
 	bindsym $mod+Tab focus right
-	bindsym Left move left
-	bindsym Down move down
+        bindsym Left move left
+        bindsym Down move down
 	bindsym Up move up
 	bindsym Right move right
 	
@@ -224,13 +225,13 @@ bindsym $mod+Shift+Next exec setxkbmap -layout se
 bindsym $mod+Shift+Prior exec xmodmap ~/.Xmodmap
 
 # Media keys
-bindsym $mod+Shift+a exec ~/.scripts/audio/audio-card-switch.sh
-bindsym XF86AudioRaiseVolume exec ~/.scripts/audio/audio-volume.sh up
-bindsym XF86AudioLowerVolume exec ~/.scripts/audio/audio-volume.sh down
-bindsym XF86AudioMute exec ~/.scripts/audio/audio-volume.sh mute
-bindsym XF86AudioPrev exec mpc prev
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPlay exec mpc toggle
+# bindsym $mod+Shift+a exec ~/.scripts/audio/audio-card-switch.sh
+# bindsym XF86AudioRaiseVolume exec ~/.scripts/audio/audio-volume.sh up
+# bindsym XF86AudioLowerVolume exec ~/.scripts/audio/audio-volume.sh down
+# bindsym XF86AudioMute exec ~/.scripts/audio/audio-volume.sh mute
+# bindsym XF86AudioPrev exec mpc prev
+# bindsym XF86AudioNext exec mpc next
+# bindsym XF86AudioPlay exec mpc toggle
 
 # Workspaces
 bindsym Mod1+1 workspace $ws_term
@@ -260,19 +261,19 @@ bindsym Mod1+Shift+n move container to workspace $ws_music
 bindsym Mod1+Shift+m move container to workspace $ws_mail
 
 # Arrow swapping
-bindsym Mod1+Left workspace prev
-bindsym Mod1+Right workspace next
+# bindsym Mod1+Left workspace prev
+# bindsym Mod1+Right workspace next
 
 # Wheel swapping
-bindsym --whole-window --border Mod1+Button5 workspace prev
-bindsym --whole-window --border Mod1+Button4 workspace next
+# bindsym --whole-window --border Mod1+Button5 workspace prev
+# bindsym --whole-window --border Mod1+Button4 workspace next
 
 # Alt tabbing
 bindsym Mod1+Tab workspace back_and_forth
 bindsym $mod+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 
 # Lock
-bindsym $mod+Mod1+Shift+l exec --no-startup-id i3lock-fancy -b=0x8
+# bindsym $mod+Mod1+Shift+l exec --no-startup-id i3lock-fancy -b=0x8
 
 # Modes
 bindsym $mod+Shift+f exec --no-startup-id bash -l ~/.scripts/i3/mode.focus.sh
