@@ -146,7 +146,7 @@ for_window [class=".*"] border pixel 0
 mouse_warping none
 
 set $mon_two HDMI-0
-set $mon_one DP-0
+set $mon_one DP-1
 
 # Workspaces
 set $ws_term "1:term"
@@ -168,25 +168,19 @@ workspace $ws_music output $mon_two
 workspace $ws_mail output $mon_two
 
 # Assignments
-#assign [class="Sublime_text"] $ws_code
 assign [class="discord"] $ws_chat
-# assign [class="Steam"] $ws_chat
-# assign [class="Wine" instance="league of legends.exe"] $ws_game
-# assign [class="Wine" instance="leagueclientux.exe"] $ws_game
-# assign [class="Wine"] $ws_game
 
 # Runtime assignments
-#for_window [title="Minecraft Launcher"] move to workspace $ws_game
+# for_window [class="Chromium"] move to workspace $ws_web
 
 # Autostart programs
 exec --no-startup-id i3-msg 'workspace 1:term; exec /usr/bin/urxvt'
-# exec --no-startup-id i3-msg 'workspace 2:code; exec ~/.scripts/urxvt/exec code'
-exec i3-msg workspace $ws_web
-exec --no-startup-id i3-msg 'workspace 3:web; exec /usr/bin/chromium'
+exec --no-startup-id i3-msg 'workspace 1:term; exec /usr/bin/urxvt'
+# exec --no-startup-id i3-msg 'workspace 3:web; exec /usr/bin/chromium'
 exec --no-startup-id i3-msg 'workspace 5:chat; exec /usr/bin/discord'
 
 # Autostart Email
-exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/christofferbergstrom93'
+# exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/christofferbergstrom93'
 # exec --no-startup-id i3-msg 'workspace 8:mail; exec ~/.scripts/urxvt/exec neomutt -F ~/.mutt/vizzit'
 
 # Glitter and diamonds
@@ -197,7 +191,7 @@ exec_always --no-startup-id xset r rate 200 35
 #exec_always --no-startup-id ~/.scripts/background/gifbg.sh
 
 # Hotkeys
-bindsym $mod+Shift+u exec ~/.scripts/colors/colors.sh
+# bindsym $mod+Shift+u exec ~/.scripts/colors/colors.sh
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
 bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f ~/Pictures/'
 bindsym Mod1+Return exec chromium
