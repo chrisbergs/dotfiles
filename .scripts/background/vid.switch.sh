@@ -38,7 +38,6 @@ fi
 
 videos=$(find $dir -type f -printf "%T@ %p\n" | sort -nr | awk '{sub($1 OFS, ""); print $0}')
 for f in $videos; do
-	echo $f
 	if [ -z "$current" ]; then
 		new=$f
 		break
