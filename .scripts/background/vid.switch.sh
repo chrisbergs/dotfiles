@@ -14,7 +14,16 @@ fi
 dir=$1
 direction=$2
 dir_config=~/.config/wall/vid/
-screen=screen_${DISPLAY//:}.conf
+
+window=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)" | cut -d " " -f5)
+position=$(xwininfo -id $window | grep "Absolute upper-left X:" | cut -d ":" -f2 | tr -d " ")
+
+if [ "$position" -gt 1920 ]; then
+	screen="screen_1.conf"
+else
+	screen="screen_0.conf"
+fi
+
 config="$dir_config$screen"
 current=""
 new=""
@@ -29,6 +38,7 @@ fi
 
 videos=$(find $dir -type f -printf "%T@ %p\n" | sort -nr | awk '{sub($1 OFS, ""); print $0}')
 for f in $videos; do
+	echo $f
 	if [ -z "$current" ]; then
 		new=$f
 		break
